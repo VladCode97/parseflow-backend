@@ -14,7 +14,6 @@ class ValidationService:
         return matches >= 2
 
     def validate_required_fields(self, extracted_fields: ExtractionResult) -> bool:
-        print(extracted_fields.fields)
         missing = []
         for field in self.REQUIRED_FIELD:
             extracted_field = extracted_fields.fields.get(field)

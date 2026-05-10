@@ -1,10 +1,12 @@
 from pydantic import BaseModel
 from typing import List
+from app.domain.models.extracted_field import ExtractionSource
 
 
 class FieldResultSchema(BaseModel):
     value: str
     confidence: float
+    source: ExtractionSource
 
 
 class LineItemSchema(BaseModel):
