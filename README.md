@@ -143,8 +143,8 @@ The API accepts requests from both `http://localhost:3000` (local development) a
 **Requirements:** Python 3.9+
 
 ```bash
-git clone <repository-url>
-cd Veryfi
+git clone https://github.com/VladCode97/parseflow-backend
+cd parseflow-backend
 python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
@@ -196,7 +196,8 @@ If `GROQ_API_KEY` is not configured, the system will still work using regex and 
 pytest tests/ --cov=app --cov-report=term-missing -v
 ```
 
----
+---cd Veryfi
+
 
 ## Good practices implemented
 
