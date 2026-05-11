@@ -4,12 +4,11 @@ from typing import Optional
 from veryfi import Client
 import tempfile
 
-"""
-Veryfi OCR Provider
-"""
-
 
 class VeryfiProvider:
+    """
+    Veryfi OCR Provider
+    """
     def __init__(
         self, api_key: str, username: str, client_id: str, client_secret: str
     ) -> None:
@@ -20,12 +19,13 @@ class VeryfiProvider:
             client_secret=client_secret,
         )
 
-    """
-    Process document from url
-    :param url: url of the document
-    """
+
 
     def _process_document_from_url(self, url: str):
+        """
+        Process document from url
+        :param url: url of the document
+        """
         return self._client.process_document_url(
             file_url=url,
             boost_mode=True,
@@ -33,14 +33,14 @@ class VeryfiProvider:
             max_pages_to_process=5,
         )
 
-    """
-    Process document from bytes
-    :param file: bytes of the document
-    :param filename: filename of the document
-    :param content_type: content type of the document
-    """
 
     def _process_document_from_bytes(self, file: bytes, filename: str):
+        """
+        Process document from bytes
+        :param file: bytes of the document
+        :param filename: filename of the document
+        :param content_type: content type of the document
+        """
         extension = Path(filename).suffix
         with tempfile.NamedTemporaryFile(
             delete=True,
@@ -53,11 +53,12 @@ class VeryfiProvider:
                 boost_mode=True,
             )
 
-    """
-   generic processing entrypoint
-    :param file: file of the document"""
 
     def process(self, file: str | bytes, filename: Optional[str] = None) -> dict:
+        """
+        generic processing entrypoint
+        :param file: file of the document
+        """
         if isinstance(file, str):
             return self._process_document_from_url(file)
         if isinstance(file, bytes):
