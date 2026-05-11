@@ -113,6 +113,10 @@ python run.py --file path/to/invoice.pdf
 python run.py --url https://example.com/invoice.pdf
 ```
 
+Note: on the first run, NLTK will automatically download the required language models. This requires an internet connection and takes a few seconds. Subsequent runs are immediate.
+
+If `GROQ_API_KEY` is not configured, the system will still work using regex and NLTK extraction only. The LLM fallback will be skipped silently.
+
 **Run the tests:**
 
 ```bash
