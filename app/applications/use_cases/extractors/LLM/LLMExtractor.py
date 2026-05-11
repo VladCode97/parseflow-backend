@@ -15,15 +15,19 @@ class LLMExtractor(BaseExtractor):
         self._confidence = ConfidenceService()
 
     def extract(self, text: str) -> ExtractionResult:
-        completion = self._client.chat.completions.create(
-            model="meta-llama/llama-4-scout-17b-16e-instruct",
-            messages=[{"role": "user", "content": self._build_prompt(text)}],
-            temperature=0,
-            max_completion_tokens=1024,
-        )
-        response = completion.choices[0].message.content
-        match = re.search(r"\{.*\}", response, re.DOTALL)
-        data = json.loads(match.group()) if match else {}
+        try:
+            completion = self._client.chat.completions.create(
+                model="meta-llama/llama-4-scout-17b-16e-instruct",
+                messages=[{"role": "user", "content": self._build_prompt(text)}],
+                temperature=0,
+                max_completion_tokens=1024,
+            )
+            response = completion.choices[0].message.content
+            match = re.search(r"\{.*\}", response, re.DOTALL)
+            data = json.loads(match.group()) if match else {}
+        except Exception:
+            data = {}
+
         fields = {}
         for key in [
             "vendor_name",
